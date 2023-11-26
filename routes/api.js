@@ -20,6 +20,7 @@ router.get("/google", async (req, res) => {
 
 router.get("/ytmp3", async (req, res) => {
   const url = req.query.link;
+  if (!url) res.json({ message: "Massukan parameter link" });
   const info = await ytdl.getInfo(url);
   const format = info.formats;
   const audio = format.filter((v) => v.hasAudio && !v.hasVideo);
